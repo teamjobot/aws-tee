@@ -138,10 +138,12 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		for _, event := range batch {
-			// 	return t.UnixNano() / int64(time.Millisecond/time.Nanosecond)
-			timestamp := time.Unix(0, *event.Timestamp*int64(time.Millisecond/time.Nanosecond))
-			fmt.Println(fmt.Sprintf("%s %s", timestamp.String(), *event.Message))
+		if !quiet {
+			for _, event := range batch {
+				// 	return t.UnixNano() / int64(time.Millisecond/time.Nanosecond)
+				timestamp := time.Unix(0, *event.Timestamp*int64(time.Millisecond/time.Nanosecond))
+				fmt.Println(fmt.Sprintf("%s %s", timestamp.String(), *event.Message))
+			}
 		}
 		sequenceToken = res.NextSequenceToken
 	}
