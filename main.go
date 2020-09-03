@@ -90,6 +90,7 @@ func main() {
 				}
 			}
 		}
+		close(events)
 	}()
 
 	var sequenceToken *string
